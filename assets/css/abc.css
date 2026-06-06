@@ -101,7 +101,7 @@ a {
 .header .body {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Tự đẩy các khối xa nhau ra ngoài biên */
+  justify-content: space-between;
   padding: 36px 0 8px;
 }
 
@@ -142,7 +142,7 @@ a {
   min-width: 144px;
 }
 
-/* --------------- Hero Section (Flexbox Equal Columns) ------------------- */
+/* --------------- Hero Section ------------------- */
 .hero {
   padding: 56px 0 65px;
   background-color: #fffcf4;
@@ -150,17 +150,17 @@ a {
 
 .hero .body {
   display: flex;
-  gap: 80px; /* Tạo khoảng cách tự động giữa cột trái và cột phải */
+  gap: 80px;
   align-items: center;
 }
 
 .hero .media-block {
-  flex: 1; /* Tự động chia đều 50% không gian màn hình */
+  flex: 1;
   position: relative;
 }
 
 .hero .media-block .img {
-  width: 100%; /* Auto layout co giãn theo khung chứa bọc ngoài */
+  width: 100%;
   max-width: 470px;
   height: 685px;
   object-fit: cover;
@@ -196,7 +196,7 @@ a {
   justify-content: center;
   align-items: center;
   background-color: #fff9e8;
-  flex-shrink: 0; /* Ngăn chặn icon tròn bị móp khi thu nhỏ */
+  flex-shrink: 0;
 }
 
 .hero-summary .icon2 {
@@ -224,7 +224,7 @@ a {
 }
 
 .hero .content-block {
-  flex: 1; /* Tự động chiếm 50% không gian còn lại */
+  flex: 1;
 }
 
 .hero .content-block .heading {
@@ -247,7 +247,7 @@ a {
   margin-top: 38px;
   display: flex;
   align-items: center;
-  gap: 28px; /* Dùng gap thay thế margin-left thủ công */
+  gap: 28px;
 }
 
 .hero .cta-group .hero-cta {
@@ -270,7 +270,7 @@ a {
   justify-content: center;
   width: 40px;
   height: 40px;
-  flex-shrink: 0; /* Giữ nút tròn hoàn hảo */
+  flex-shrink: 0;
   background: #ffffff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.07);
   border-radius: 50%;
@@ -310,7 +310,7 @@ a {
   margin-left: 28px;
 }
 
-/* --------------- Popular Section (Grid Auto Layout) ------------------- */
+/* --------------- Popular Section ------------------- */
 .popular {
   padding: 65px 0;
   margin-top: 135px;
@@ -357,11 +357,10 @@ a {
   color: white;
 }
 
-/* Áp dụng CSS Grid: Tự động xếp hàng, tự động chia đều khoảng cách */
 .popular .course-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tạo 3 cột bằng nhau tuyệt đối */
-  gap: 30px; /* Tự động tạo khoảng cách giữa các Card */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
   margin-top: 55px;
 }
 
@@ -373,8 +372,6 @@ a {
     border-color 0.3s,
     box-shadow 0.3s;
   position: relative;
-
-  /* Biến bản thân cái Card thành khối Flex dọc để đẩy footer xuống đáy */
   display: flex;
   flex-direction: column;
 }
@@ -388,13 +385,11 @@ a {
   width: 100%;
   height: 278px;
   object-fit: cover;
-  border-radius: 11px 11px 0px 0px; /* Nhỏ hơn border cha 1px để không bị lẹm góc */
+  border-radius: 11px 11px 0px 0px;
 }
 
 .popular .course-item .info {
   padding: var(--space-sm) 22px 22px;
-
-  /* Auto layout: Tự phình phần thân để đẩy phần footer (.foot) bám sát đáy */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -403,7 +398,7 @@ a {
 .course-item .head {
   display: flex;
   justify-content: space-between;
-  align-items: start; /* Căn đỉnh để tránh lệch khi tiêu đề quá dài */
+  align-items: start;
   gap: var(--space-xs);
 }
 
@@ -418,12 +413,12 @@ a {
 .course-item .head .rating {
   display: flex;
   align-items: center;
-  flex-shrink: 0; /* Ngăn không cho cụm rating bị ép nhỏ */
+  flex-shrink: 0;
 }
 
 .course-item .head .rating span {
   font-size: 1.6rem;
-  line-weight: 1.75;
+  line-height: 1.75;
   color: #fea31b;
   margin-left: 5px;
 }
@@ -433,15 +428,14 @@ a {
   line-height: 1.86;
   color: var(--text-color);
   margin-top: 6px;
-  margin-bottom: var(--space-md); /* Tạo khoảng cách an toàn với chân trang */
+  margin-bottom: var(--space-md);
 }
 
-/* Chân Card: Tự động bám đáy và dạt đều 2 bên */
 .course-item .info .foot {
-  margin-top: auto; /* Bùa chú Auto Layout để đẩy footer luôn sát đáy hộp */
+  margin-top: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Đẩy giá sang trái, nút sang phải tự động */
+  justify-content: space-between;
 }
 
 .course-item .info .foot .price {
@@ -467,7 +461,6 @@ a {
   background: var(--primary-color);
 }
 
-/* --- Giải pháp phủ liên kết chuẩn UX --- */
 .main-link::after {
   content: "";
   position: absolute;
@@ -475,11 +468,129 @@ a {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1; /* Lớp phủ click toàn Card */
+  z-index: 1;
 }
 
 .btn-book,
 .course-item .head .rating {
   position: relative;
-  z-index: 2; /* Nổi lên trên lớp phủ để click riêng biệt */
+  z-index: 2;
+}
+
+/* ==========================================================================
+   ⚡ CẤU HÌNH AUTO LAYOUT CHO ĐIỆN THOẠI (RESPONSIVE)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Căn chỉnh lại độ lớn chữ tổng thể trên mobile */
+  .heading-lv2 {
+    font-size: 2.8rem;
+  }
+
+  /* --- Header --- */
+  .header .body {
+    padding: 16px 0;
+  }
+
+  /* Ẩn menu chữ truyền thống vì không đủ chỗ, sau này bạn làm nút hamburger sau */
+  .nav {
+    display: none;
+  }
+
+  .header .action {
+    margin-left: auto;
+  }
+
+  /* --- Hero Section --- */
+  .hero {
+    padding: 32px 0;
+  }
+
+  .hero .body {
+    flex-direction: column-reverse; /* Đẩy khối chữ lên trước, khối ảnh xuống sau */
+    gap: 40px;
+  }
+
+  .hero .content-block,
+  .hero .media-block {
+    width: 100%;
+    flex: none;
+  }
+
+  .hero .content-block {
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .hero .content-block .heading {
+    font-size: 3.4rem; /* Thu nhỏ tiêu đề vừa vặn màn hình dọc */
+    line-height: 1.2;
+  }
+
+  .hero .cta-group {
+    flex-direction: column; /* Nút bấm xếp hàng dọc */
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .hero .watch-video {
+    justify-content: center;
+    margin-left: 0;
+    padding: 12px 0;
+  }
+
+  .hero .media-block .img {
+    height: 400px; /* Hạ bớt chiều cao ảnh để không choáng màn hình */
+  }
+
+  /* Đưa hộp Summary ra dưới ảnh hoặc thu nhỏ gọn gàng */
+  .hero .hero-summary {
+    position: relative;
+    bottom: 0;
+    margin-top: -60px; /* Hiệu ứng đè nhẹ lên ảnh đẹp mắt */
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .hero .stats {
+    justify-content: space-between;
+  }
+
+  .hero .stats strong {
+    font-size: 3.2rem;
+  }
+
+  .hero .stats strong:nth-child(2) {
+    margin-left: 0;
+  }
+
+  /* --- Popular Section --- */
+  .popular {
+    margin-top: 48px;
+    padding: 32px 0;
+  }
+
+  .popular .popular-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  /* Ẩn nút điều hướng trái phải vì mobile sẽ vuốt chạm */
+  .popular .controls {
+    display: none;
+  }
+
+  /* Quan trọng: Biến 3 Card khóa học từ hàng ngang thành 1 cột dọc thẳng tắp */
+  .popular .course-list {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: 32px;
+  }
+
+  .popular .course-list .course-item img.thumb {
+    height: 200px; /* Thu hẹp chiều cao ảnh card trên điện thoại */
+  }
 }
