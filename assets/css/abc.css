@@ -2,19 +2,32 @@
 * {
   box-sizing: border-box;
 }
+
 :root {
   --primary-color: #ffb900;
+  --dark-color: #171100;
+  --text-color: #5f5b53;
+
+  /* Hệ thống Spacing chuẩn Auto Layout */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
 }
-/* để đổi đơn vị 1rem=10px */
+
+/* Đổi đơn vị 1rem = 10px */
 html {
   font-size: 62.5%;
 }
----------------/* Common */-------------------
 
+/* --------------- Common ------------------- */
 body {
   font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
+  background-color: #fff;
 }
+
 a {
   color: inherit;
   text-decoration: none;
@@ -22,44 +35,35 @@ a {
 
 .heading-lv2 {
   font-family: "Sen";
-  font-style: normal;
   font-weight: 700;
   font-size: 3.8rem;
   line-height: 1.26;
-  /* identical to box height, or 126% */
   letter-spacing: -0.02em;
-
-  color: #171100;
+  color: var(--dark-color);
 }
+
 .btn {
-  /* Sign Up */
   display: inline-block;
   min-width: 118px;
-  padding: 0 16px;
+  padding: 0 var(--space-sm);
   line-height: 50px;
-  font-family: "Poppins", sans-serif;
-
   font-weight: 600;
   font-size: 1.6rem;
   text-align: center;
-
   color: #ffffff;
-
-  background: #171100;
+  background: var(--dark-color);
   border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition:
+    opacity 0.3s,
+    background-color 0.3s;
 }
+
 .btn:hover {
   opacity: 0.9;
-  transition: 0.4s;
 }
-.header {
-  background-color: #fffcf4;
-}
-.header.fixed {
-  position: sticky;
-  top: -28px;
-  z-index: 1;
-}
+
 .main-content {
   width: 1170px;
   max-width: calc(100% - 48px);
@@ -67,12 +71,14 @@ a {
   margin-right: auto;
 }
 
+/* Tránh tràn chữ, bóp méo layout */
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: var(--line-clamp, 1);
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 .line-clamp.line-2 {
   --line-clamp: 2;
 }
@@ -80,95 +86,108 @@ a {
 .break-all {
   word-break: break-all;
 }
+
+/* --------------- Header (Flexbox Auto) ------------------- */
+.header {
+  background-color: #fffcf4;
+}
+
+.header.fixed {
+  position: sticky;
+  top: -28px;
+  z-index: 99;
+}
+
 .header .body {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Tự đẩy các khối xa nhau ra ngoài biên */
   padding: 36px 0 8px;
 }
-.nav {
-  margin-left: auto;
-}
+
 .nav ul {
   display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 .nav a {
-  /* Courses */
-  font-family: "Poppins", sans-serif;
-
-  font-size: 16px;
+  display: block;
+  font-size: 1.6rem;
   line-height: 28px;
-
-  color: #5f5b53;
+  color: var(--text-color);
   padding: 8px 21px;
   position: relative;
 }
+
 .nav li.active a,
 .nav a:hover {
-  /* Home */
-
-  /* font-weight: 600; */
   text-shadow: 1px 0 0 currentColor;
-  font-size: 16px;
-
-  color: #171100;
-  transition: 0.3s;
+  color: var(--dark-color);
 }
+
 .nav li.active a::after {
   content: "";
-  /* Rectangle 4579 */
   position: absolute;
-  display: block;
   left: 21px;
   bottom: 6px;
   width: 12px;
   height: 2px;
-
-  background: #171100;
+  background: var(--dark-color);
   border-radius: 1px;
 }
+
 .header .btn-sign-up {
   min-width: 144px;
 }
-.header .action {
-  margin-left: 49px;
-}
+
+/* --------------- Hero Section (Flexbox Equal Columns) ------------------- */
 .hero {
   padding: 56px 0 65px;
   background-color: #fffcf4;
 }
+
 .hero .body {
   display: flex;
+  gap: 80px; /* Tạo khoảng cách tự động giữa cột trái và cột phải */
+  align-items: center;
 }
+
 .hero .media-block {
-  width: 48%;
+  flex: 1; /* Tự động chia đều 50% không gian màn hình */
   position: relative;
 }
 
 .hero .media-block .img {
-  width: 470px;
+  width: 100%; /* Auto layout co giãn theo khung chứa bọc ngoài */
+  max-width: 470px;
   height: 685px;
   object-fit: cover;
   border-radius: 20px;
 }
+
 .hero .hero-summary {
-  padding: 24px;
+  padding: var(--space-md);
   width: 270px;
   position: absolute;
   bottom: 48px;
   right: 0;
-  /* Base */
-
   background: #ffffff;
   box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
+  z-index: 2;
 }
+
 .hero-summary .item {
   display: flex;
   align-items: center;
 }
+
 .hero-summary .item + .item {
   margin-top: 22px;
 }
+
 .hero-summary .icon {
   width: 48px;
   height: 48px;
@@ -177,174 +196,172 @@ a {
   justify-content: center;
   align-items: center;
   background-color: #fff9e8;
+  flex-shrink: 0; /* Ngăn chặn icon tròn bị móp khi thu nhỏ */
 }
+
 .hero-summary .icon2 {
   background-color: #fcefff;
 }
 .hero-summary .icon3 {
   background-color: #ebeaff;
 }
+
 .hero-summary .info {
-  margin-left: 16px;
+  margin-left: var(--space-sm);
 }
+
 .hero-summary .label {
-  /* 20 Courses */
-  font-family: "Poppins";
-  font-style: normal;
   font-size: 1.4rem;
   line-height: 1.86;
-  /* identical to box height, or 186% */
-
-  color: #5f5b53;
+  color: var(--text-color);
 }
-.hero-summary .title {
-  /* UI/UX Design */
 
-  font-family: "Poppins";
-  font-style: normal;
+.hero-summary .title {
   font-weight: 600;
   font-size: 1.8rem;
   line-height: 1.67;
-  /* identical to box height, or 167% */
+  color: var(--dark-color);
+}
 
-  color: #171100;
-}
 .hero .content-block {
-  width: 52%;
-  padding-left: 130px;
-  padding-top: 64px;
+  flex: 1; /* Tự động chiếm 50% không gian còn lại */
 }
+
 .hero .content-block .heading {
   font-family: "Sen";
-  font-style: normal;
   font-weight: 700;
   font-size: 5.8rem;
   line-height: 1.17;
-  /* or 117% */
   letter-spacing: -0.02em;
-
-  color: #171100;
+  color: var(--dark-color);
 }
+
 .hero .content-block .desc {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
   font-size: 1.8rem;
   line-height: 1.67;
-  /* or 167% */
-
-  color: #5f5b53;
+  color: var(--text-color);
   margin-top: 22px;
 }
+
 .hero .cta-group {
   margin-top: 38px;
   display: flex;
   align-items: center;
+  gap: 28px; /* Dùng gap thay thế margin-left thủ công */
 }
+
 .hero .cta-group .hero-cta {
   min-width: 180px;
   line-height: 64px;
   background-color: var(--primary-color);
 }
+
 .hero .watch-video {
   border: none;
   background: transparent;
   display: flex;
-  margin-left: 28px;
   align-items: center;
   cursor: pointer;
 }
+
 .hero .watch-video .icon {
-  /* Ellipse 2646 */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  min-width: 40px;
+  flex-shrink: 0; /* Giữ nút tròn hoàn hảo */
   background: #ffffff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.07);
-  border-radius: 40px;
+  border-radius: 50%;
 }
-.hero .watch-video span {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 1.67;
-  /* identical to box height, or 167% */
 
-  color: #171100;
-  margin-left: 14px;
-}
-.hero .content-block .desc-recent {
-  margin-top: 48px;
-}
-.hero .stats strong {
-  /* 50K Students */
-  font-family: "Sen";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 4.4rem;
-  line-height: 1.23;
-  /* identical to box height, or 123% */
-
-  color: #171100;
-  margin-right: 15px;
-}
-.hero .stats strong:nth-child(2) {
-  margin-left: 28px;
-}
 .hero .cta-group .watch-video .icon img {
   margin-left: 2px;
 }
+
+.hero .watch-video span {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.67;
+  color: var(--dark-color);
+  margin-left: 14px;
+}
+
+.hero .content-block .desc-recent {
+  margin-top: var(--space-xl);
+}
+
+.hero .stats {
+  display: flex;
+  align-items: center;
+}
+
+.hero .stats strong {
+  font-family: "Sen";
+  font-weight: 700;
+  font-size: 4.4rem;
+  line-height: 1.23;
+  color: var(--dark-color);
+  margin-right: 15px;
+}
+
+.hero .stats strong:nth-child(2) {
+  margin-left: 28px;
+}
+
+/* --------------- Popular Section (Grid Auto Layout) ------------------- */
 .popular {
   padding: 65px 0;
   margin-top: 135px;
 }
+
 .popular .popular-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-md);
 }
+
 .popular-top .desc {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
   font-size: 1.8rem;
   line-height: 1.67;
-  /* or 167% */
-
-  color: #5f5b53;
+  color: var(--text-color);
   max-width: 458px;
-  margin-top: 16px;
+  margin-top: var(--space-sm);
 }
+
 .popular .controls {
   display: flex;
   gap: 18px;
 }
+
 .popular .controls-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* Ellipse 1853 */
   width: 40px;
   height: 40px;
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
   background: transparent;
   border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
+
 .popular .controls-btn:hover {
   background-color: var(--primary-color);
   color: white;
-  cursor: pointer;
 }
 
+/* Áp dụng CSS Grid: Tự động xếp hàng, tự động chia đều khoảng cách */
 .popular .course-list {
-  display: flex;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tạo 3 cột bằng nhau tuyệt đối */
+  gap: 30px; /* Tự động tạo khoảng cách giữa các Card */
   margin-top: 55px;
 }
 
@@ -356,98 +373,101 @@ a {
     border-color 0.3s,
     box-shadow 0.3s;
   position: relative;
-  flex: 1;
+
+  /* Biến bản thân cái Card thành khối Flex dọc để đẩy footer xuống đáy */
+  display: flex;
+  flex-direction: column;
 }
+
 .popular .course-list .course-item:hover {
-  background: #ffffff;
   box-shadow: 0px 18px 36px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  border: 1px solid transparent;
+  border-color: transparent;
 }
+
 .popular .course-list .course-item img.thumb {
-  /* Image */
   width: 100%;
   height: 278px;
   object-fit: cover;
-  background: url(image.png);
-  border-radius: 12px 12px 0px 0px;
+  border-radius: 11px 11px 0px 0px; /* Nhỏ hơn border cha 1px để không bị lẹm góc */
 }
-.popular .course-list .course-item .title {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 1.67;
-  /* identical to box height, or 167% */
 
-  color: #171100;
+.popular .course-item .info {
+  padding: var(--space-sm) 22px 22px;
+
+  /* Auto layout: Tự phình phần thân để đẩy phần footer (.foot) bám sát đáy */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
+
 .course-item .head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start; /* Căn đỉnh để tránh lệch khi tiêu đề quá dài */
+  gap: var(--space-xs);
 }
-.course-item .head .rating {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 3px;
-}
-.course-item .head .rating span {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 1.75;
-  /* identical to box height, or 175% */
 
-  color: #fea31b;
-  margin-left: 5px;
-}
-.course-item .info .desc {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 1.86;
-  /* or 186% */
-
-  color: #5f5b53;
-  margin-top: 6px;
-}
-.course-item .info .foot {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 141px;
-}
-.course-item .info .foot .price {
-  font-family: "Poppins";
-  font-style: normal;
+.popular .course-list .course-item .title {
   font-weight: 600;
   font-size: 1.8rem;
   line-height: 1.67;
-  /* identical to box height, or 167% */
+  color: var(--dark-color);
+  flex: 1;
+}
 
-  color: #171100;
+.course-item .head .rating {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Ngăn không cho cụm rating bị ép nhỏ */
 }
-.popular .course-item .info {
-  padding: 16px 22px 22px;
+
+.course-item .head .rating span {
+  font-size: 1.6rem;
+  line-weight: 1.75;
+  color: #fea31b;
+  margin-left: 5px;
 }
+
+.course-item .info .desc {
+  font-size: 1.4rem;
+  line-height: 1.86;
+  color: var(--text-color);
+  margin-top: 6px;
+  margin-bottom: var(--space-md); /* Tạo khoảng cách an toàn với chân trang */
+}
+
+/* Chân Card: Tự động bám đáy và dạt đều 2 bên */
+.course-item .info .foot {
+  margin-top: auto; /* Bùa chú Auto Layout để đẩy footer luôn sát đáy hộp */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Đẩy giá sang trái, nút sang phải tự động */
+}
+
+.course-item .info .foot .price {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.67;
+  color: var(--dark-color);
+}
+
 .course-item .info .foot .btn-book {
   width: 118px;
   height: 50px;
-
-  background: #171100;
+  background: var(--dark-color);
+  color: #fff;
   border-radius: 25px;
   border: none;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
 }
+
 .course-item .info .foot .btn-book:hover {
   background: var(--primary-color);
 }
 
-/* Biến vùng bấm của tiêu đề phủ lên toàn bộ diện tích cái Card */
+/* --- Giải pháp phủ liên kết chuẩn UX --- */
 .main-link::after {
   content: "";
   position: absolute;
@@ -455,11 +475,11 @@ a {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1; /* Phủ lên toàn bộ phần card */
+  z-index: 1; /* Lớp phủ click toàn Card */
 }
 
-/* Đẩy nút Book Now lên trên cùng để không bị vùng phủ của main-link che mất */
-.btn-book {
+.btn-book,
+.course-item .head .rating {
   position: relative;
-  z-index: 2; /* Cao hơn z-index: 1, giúp nút Book Now vẫn bấm riêng được */
+  z-index: 2; /* Nổi lên trên lớp phủ để click riêng biệt */
 }
